@@ -1,5 +1,3 @@
-# Note turtle module only works on .gif format image file. If we have image in other format convert into .gif first
-# Bug 1, while running the code, If same state name was written again, and again it is counted as correct answer
 import turtle
 import pandas
 
@@ -9,7 +7,7 @@ screen.title("Indian States and UTs Game")
 
 # Loading image to the screen
 image = "india_map.gif"
-screen.bgpic(image)  # Make image as background picture on screen
+screen.bgpic(image)  
 
 tur = turtle.Turtle()
 tur.penup()
@@ -17,7 +15,7 @@ tur.hideturtle()
 
 data = pandas.read_csv("indian_states.csv")
 states_list = data["states"].to_list()
-temp_state_list = states_list  # so that we can remove bug 1
+temp_state_list = states_list  
 
 should_continue = True
 correct = 0  # to keep the count of correct answer given by user
@@ -40,7 +38,7 @@ while should_continue:
         print("Missing states are: \n")
         print(missing_states)
 
-        break  # it will make the program exit form while loop
+        break  
 
     for state in temp_state_list:
         if state.lower() == answer_state:
@@ -48,8 +46,8 @@ while should_continue:
 
             # now when the answer matches we should take that particular row and get it's x, y coordinate
             state_row = data[data["states"] == state]  # getting the row of answer_state and save it as a list
-            x_co = int(state_row["x"])  # got the x coordinate...note we need to convert into int by default its string
-            y_co = int(state_row["y"])  # got the y coordinate
+            x_co = int(state_row["x"])  
+            y_co = int(state_row["y"]) 
 
             tur.goto(x_co, y_co)
             tur.write(state, align="center")
@@ -62,8 +60,8 @@ while should_continue:
         tur.goto(0, 0)
         tur.write("Congrats! You Guessed all States and UTs correctly", align="center", font = ("Arial’", 20, "normal"))
         should_continue = False
-        screen.exitonclick()  # We need the screen to show congrats message so using screen,exitonclick() inside this if
+        screen.exitonclick()  
 
 
-# Here don't use screen.exitonclick() here, otherwise even if user types exit screen will remain open unless we click on it
+
 
